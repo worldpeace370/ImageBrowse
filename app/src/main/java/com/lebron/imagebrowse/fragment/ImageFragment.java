@@ -171,6 +171,7 @@ public class ImageFragment extends Fragment implements SwipeRefreshLayout.OnRefr
 //        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         mRecyclerView.setLayoutManager(layoutManager);
         mStaggeredGridAdapter = new StaggeredGridAdapter(getContext(), true, mTotalList);
+        //设置RecyclerView中每个Item的点击监听事件，自己定义的
         mStaggeredGridAdapter.setOnChildClickListener(this);
         mRecyclerView.setAdapter(mStaggeredGridAdapter);
 

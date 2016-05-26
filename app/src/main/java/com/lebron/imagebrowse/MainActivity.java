@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements ImageFragment.Ima
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.add(R.id.container, mImageFragment, "image");
+            //transaction.addToBackStack(null);如果加入回退栈，则container里是当前ImageFragment时，按下返回键会出现白屏
             transaction.commit();
         }
     }
@@ -79,12 +80,14 @@ public class MainActivity extends AppCompatActivity implements ImageFragment.Ima
 
     @Override
     public void onFragmentInteraction(ImageInfo data) {
+        //将点击对应图片的url地址作为参数传送到ImageDetailFragment
         ImageDetailFragment fragment = ImageDetailFragment.newInstance(data.getBig_img(), null);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         //不希望mImageFragment的视图在按下返回键时重新绘制，需要hide
         transaction.hide(mImageFragment);
         transaction.add(R.id.container, fragment, "imageDetail");
+        //加入回退栈，当按下返回键时，则显示刚才隐藏了的mImageFragment
         transaction.addToBackStack(null);
         transaction.commit();
     }
